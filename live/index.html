@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Football — Football Chronicle</title>
+
+    <meta
+        name="description"
+        content="Live football scores, fixtures, results, match events and football matchday information from around the world."
+    >
+
+    <meta name="theme-color" content="#050806">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        /* =====================================================
+           LIVE CENTRE
+        ====================================================== */
+
+        .page-shell {
+            width: min(calc(100% - 60px), 1400px);
+            margin: 0 auto;
+        }
+
+        .page-hero {
+            min-height: 430px;
+            display: flex;
+            align-items: end;
+            padding: 100px 0 70px;
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            right: 5%;
+            top: 20%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(57,255,136,0.08),
+                    transparent 68%
+                );
+            pointer-events: none;
+        }
+
+        .page-kicker {
+            color: var(--green);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(60px, 9vw, 125px);
+            line-height: .84;
+            letter-spacing: -6px;
+        }
+
+        .page-hero h1 span {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(238,255,244,.4);
+        }
+
+        .page-hero p {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-top: 28px;
+        }
+
+
+        /* =====================================================
+           CONTROL BAR
+        ====================================================== */
+
+        .live-controls {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+
+            padding: 18px 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .date-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .date-button {
+            min-width: 44px;
+            height: 42px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(255,255,255,.015);
+
+            color: var(--muted);
+
+            display: grid;
+            place-items: center;
+
+            cursor: pointer;
+
+            transition: .3s ease;
+        }
+
+        .date-button:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .date-button.active {
+            background: var(--green);
+            color: #041009;
+            border-color: var(--green);
+            font-weight: 800;
+        }
+
+        .date-button strong {
+            font-family: var(--font-display);
+            font-size: 11px;
+        }
+
+        .date-button small {
+            display: block;
+            font-size: 7px;
+            letter-spacing: 1px;
+        }
+
+        .filter-select {
+            height: 42px;
+
+            border: 1px solid var(--line);
+
+            background: #08100b;
+
+            color: var(--white);
+
+            padding: 0 15px;
+
+            outline: none;
+
+            font-size: 9px;
+            letter-spacing: 1px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           LIVE SUMMARY
+        ====================================================== */
+
+        .live-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+
+            background: var(--line);
+
+            margin-top: 50px;
+        }
+
+        .summary-box {
+            background: rgba(9,18,12,.9);
+            padding: 25px;
+        }
+
+        .summary-label {
+            display: block;
+            color: #607167;
+            font-size: 8px;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .summary-value {
+            font-family: var(--font-display);
+            font-size: 32px;
+        }
+
+        .summary-value.live {
+            color: var(--danger);
+        }
+
+
+        /* =====================================================
+           MATCH LIST
+        ====================================================== */
+
+        .matches-area {
+            padding: 80px 0 130px;
+        }
+
+        .competition-block {
+            margin-bottom: 35px;
+            border: 1px solid var(--line);
+            background: rgba(7,15,10,.75);
+        }
+
+        .competition-header {
+            min-height: 62px;
+
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--line);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(57,255,136,.045),
+                    transparent
+                );
+        }
+
+        .competition-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .competition-icon {
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--line-bright);
+            border-radius: 50%;
+
+            color: var(--green);
+
+            font-size: 10px;
+        }
+
+        .competition-name strong {
+            font-family: var(--font-display);
+            font-size: 12px;
+            letter-spacing: .5px;
+        }
+
+        .competition-country {
+            color: #607167;
+            font-size: 8px;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        .competition-header > span {
+            color: #536359;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           MATCH ROW
+        ====================================================== */
+
+        .match-row {
+            min-height: 100px;
+
+            display: grid;
+
+            grid-template-columns:
+                90px
+                1fr
+                150px
+                1fr
+                90px;
+
+            align-items: center;
+
+            border-bottom: 1px solid rgba(102,255,153,.08);
+
+            padding: 0 20px;
+
+            transition: .3s ease;
+        }
+
+        .match-row:last-child {
+            border-bottom: none;
+        }
+
+        .match-row:hover {
+            background: rgba(57,255,136,.025);
+        }
+
+        .match-time {
+            color: #829388;
+            font-family: var(--font-display);
+            font-size: 12px;
+        }
+
+        .match-time.live {
+            color: var(--danger);
+        }
+
+        .match-team {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .match-team.home {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .club-badge {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--line);
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--green);
+
+            font-family: var(--font-display);
+            font-size: 8px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(57,255,136,.08),
+                    transparent
+                );
+        }
+
+        .score-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .score-line {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            font-family: var(--font-display);
+            font-size: 25px;
+        }
+
+        .score-line span {
+            color: #415047;
+            font-size: 16px;
+        }
+
+        .match-status {
+            margin-top: 5px;
+            color: #56675c;
+            font-size: 7px;
+            letter-spacing: 1.3px;
+        }
+
+        .match-status.live {
+            color: var(--danger);
+        }
+
+        .match-events {
+            text-align: right;
+            color: #526258;
+            font-size: 8px;
+            line-height: 1.7;
+        }
+
+        .match-events span {
+            display: block;
+        }
+
+
+        /* =====================================================
+           EMPTY / API STATE
+        ====================================================== */
+
+        .data-notice {
+
+            margin-top: 30px;
+
+            padding: 20px;
+
+            border: 1px dashed var(--line-bright);
+
+            background: rgba(57,255,136,.02);
+
+            color: #687a6e;
+
+            font-size: 9px;
+
+            line-height: 1.7;
+
+            letter-spacing: .3px;
+        }
+
+        .data-notice strong {
+            color: var(--green);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .live-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .match-row {
+                grid-template-columns:
+                    70px
+                    1fr
+                    100px
+                    1fr
+                    50px;
+            }
+
+            .match-events {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .page-shell {
+                width: calc(100% - 30px);
+            }
+
+            .page-hero {
+                min-height: 400px;
+                padding: 80px 0 55px;
+            }
+
+            .page-hero h1 {
+                font-size: 60px;
+                letter-spacing: -4px;
+            }
+
+            .live-controls {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .date-controls {
+                overflow-x: auto;
+            }
+
+            .date-button {
+                flex-shrink: 0;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .live-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .match-row {
+                grid-template-columns:
+                    55px
+                    1fr
+                    70px
+                    1fr;
+                padding: 0 10px;
+            }
+
+            .match-row > :last-child {
+                display: none;
+            }
+
+            .match-team {
+                font-size: 9px;
+            }
+
+            .club-badge {
+                width: 30px;
+                height: 30px;
+            }
+
+            .score-line {
+                font-size: 20px;
+                gap: 7px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-grid"></div>
+    <div class="background-glow"></div>
+
+    <canvas id="footballCanvas"></canvas>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <a href="../index.html" class="brand">
+
+            <div class="brand-ball">⚽</div>
+
+            <div>
+                <span class="brand-small">THE WORLD OF</span>
+                <span class="brand-name">FOOTBALL CHRONICLE</span>
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="index.html">
+                <span class="nav-dot live-dot"></span>
+                LIVE
+            </a>
+
+            <a href="../matches/index.html">MATCHES</a>
+
+            <a href="../competitions/index.html">COMPETITIONS</a>
+
+            <a href="../clubs/index.html">CLUBS</a>
+
+            <a href="../players/index.html">PLAYERS</a>
+
+            <a href="../history/index.html">HISTORY</a>
+
+        </nav>
+
+
+        <a href="../search/index.html" class="search-button">
+            <span>⌕</span>
+            SEARCH
+        </a>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =================================================
+             PAGE HERO
+        ================================================== -->
+
+        <section class="page-shell page-hero">
+
+            <div>
+
+                <div class="page-kicker">
+                    ● GLOBAL MATCH CENTRE // 001
+                </div>
+
+                <h1>
+                    LIVE
+                    <span>FOOTBALL.</span>
+                </h1>
+
+                <p>
+                    Follow football matches from around the world.
+                    Live scores, fixtures, results, goals, cards,
+                    substitutions, lineups and match statistics will
+                    eventually flow through this central match centre.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTROLS
+        ================================================== -->
+
+        <section class="page-shell">
+
+            <div class="live-controls">
+
+                <div class="date-controls">
+
+                    <button class="date-button">
+                        <strong>←</strong>
+                    </button>
+
+                    <button class="date-button active">
+                        <small>TODAY</small>
+                        <strong>16 SEP</strong>
+                    </button>
+
+                    <button class="date-button">
+                        <small>THU</small>
+                        <strong>17 SEP</strong>
+                    </button>
+
+                    <button class="date-button">
+                        <small>FRI</small>
+                        <strong>18 SEP</strong>
+                    </button>
+
+                    <button class="date-button">
+                        <small>SAT</small>
+                        <strong>19 SEP</strong>
+                    </button>
+
+                    <button class="date-button">
+                        <small>SUN</small>
+                        <strong>20 SEP</strong>
+                    </button>
+
+                    <button class="date-button">
+                        <strong>→</strong>
+                    </button>
+
+                </div>
+
+
+                <select class="filter-select">
+
+                    <option>ALL COMPETITIONS</option>
+                    <option>PREMIER LEAGUE</option>
+                    <option>CHAMPIONS LEAGUE</option>
+                    <option>LA LIGA</option>
+                    <option>BUNDESLIGA</option>
+                    <option>SERIE A</option>
+                    <option>LIGUE 1</option>
+                    <option>INTERNATIONAL</option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <section class="page-shell">
+
+            <div class="live-summary">
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+                        LIVE NOW
+                    </span>
+
+                    <strong class="summary-value live">
+                        03
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+                        TODAY
+                    </span>
+
+                    <strong class="summary-value">
+                        48
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+                        GOALS TODAY
+                    </span>
+
+                    <strong class="summary-value">
+                        127
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span class="summary-label">
+                        COMPETITIONS
+                    </span>
+
+                    <strong class="summary-value">
+                        19
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MATCHES
+        ================================================== -->
+
+        <section class="page-shell matches-area">
+
+
+            <!-- PREMIER LEAGUE -->
+
+            <div class="competition-block">
+
+                <div class="competition-header">
+
+                    <div class="competition-name">
+
+                        <div class="competition-icon">
+                            PL
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                PREMIER LEAGUE
+                            </strong>
+
+                            <div class="competition-country">
+                                ENGLAND // MATCHDAY
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span>
+                        3 MATCHES
+                    </span>
+
+                </div>
+
+
+                <!-- MATCH 1 -->
+
+                <div class="match-row">
+
+                    <div class="match-time live">
+                        67'
+                    </div>
+
+
+                    <div class="match-team home">
+
+                        <strong>
+                            Arsenal
+                        </strong>
+
+                        <div class="club-badge">
+                            ARS
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-column">
+
+                        <div class="score-line">
+
+                            <strong>2</strong>
+
+                            <span>—</span>
+
+                            <strong>1</strong>
+
+                        </div>
+
+                        <div class="match-status live">
+                            LIVE
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-team">
+
+                        <div class="club-badge">
+                            CHE
+                        </div>
+
+                        <strong>
+                            Chelsea
+                        </strong>
+
+                    </div>
+
+
+                    <div class="match-events">
+
+                        <span>⚽ 23' ARS</span>
+                        <span>⚽ 51' ARS</span>
+                        <span>⚽ 62' CHE</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MATCH 2 -->
+
+                <div class="match-row">
+
+                    <div class="match-time">
+                        20:00
+                    </div>
+
+
+                    <div class="match-team home">
+
+                        <strong>
+                            Tottenham
+                        </strong>
+
+                        <div class="club-badge">
+                            TOT
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-column">
+
+                        <div class="score-line">
+
+                            <strong>—</strong>
+
+                            <span>—</span>
+
+                            <strong>—</strong>
+
+                        </div>
+
+                        <div class="match-status">
+                            UPCOMING
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-team">
+
+                        <div class="club-badge">
+                            AVL
+                        </div>
+
+                        <strong>
+                            Aston Villa
+                        </strong>
+
+                    </div>
+
+
+                    <div class="match-events">
+                        <span>LINEUPS TBA</span>
+                    </div>
+
+                </div>
+
+
+                <!-- MATCH 3 -->
+
+                <div class="match-row">
+
+                    <div class="match-time">
+                        20:00
+                    </div>
+
+
+                    <div class="match-team home">
+
+                        <strong>
+                            Brighton
+                        </strong>
+
+                        <div class="club-badge">
+                            BHA
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-column">
+
+                        <div class="score-line">
+
+                            <strong>—</strong>
+
+                            <span>—</span>
+
+                            <strong>—</strong>
+
+                        </div>
+
+                        <div class="match-status">
+                            UPCOMING
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-team">
+
+                        <div class="club-badge">
+                            ARS
+                        </div>
+
+                        <strong>
+                            Arsenal
+                        </strong>
+
+                    </div>
+
+
+                    <div class="match-events">
+                        <span>LINEUPS TBA</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHAMPIONS LEAGUE -->
+
+            <div class="competition-block">
+
+                <div class="competition-header">
+
+                    <div class="competition-name">
+
+                        <div class="competition-icon">
+                            UCL
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                UEFA CHAMPIONS LEAGUE
+                            </strong>
+
+                            <div class="competition-country">
+                                EUROPE // MATCHDAY
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span>
+                        MATCHES
+                    </span>
+
+                </div>
+
+
+                <div class="match-row">
+
+                    <div class="match-time">
+                        17:45
+                    </div>
+
+                    <div class="match-team home">
+
+                        <strong>
+                            Real Madrid
+                        </strong>
+
+                        <div class="club-badge">
+                            RMA
+                        </div>
+
+                    </div>
+
+                    <div class="score-column">
+
+                        <div class="score-line">
+                            <strong>—</strong>
+                            <span>—</span>
+                            <strong>—</strong>
+                        </div>
+
+                        <div class="match-status">
+                            UPCOMING
+                        </div>
+
+                    </div>
+
+                    <div class="match-team">
+
+                        <div class="club-badge">
+                            BAY
+                        </div>
+
+                        <strong>
+                            Bayern
+                        </strong>
+
+                    </div>
+
+                    <div class="match-events">
+                        <span>LINEUPS TBA</span>
+                    </div>
+
+                </div>
+
+
+                <div class="match-row">
+
+                    <div class="match-time">
+                        20:00
+                    </div>
+
+                    <div class="match-team home">
+
+                        <strong>
+                            Barcelona
+                        </strong>
+
+                        <div class="club-badge">
+                            BAR
+                        </div>
+
+                    </div>
+
+                    <div class="score-column">
+
+                        <div class="score-line">
+                            <strong>—</strong>
+                            <span>—</span>
+                            <strong>—</strong>
+                        </div>
+
+                        <div class="match-status">
+                            UPCOMING
+                        </div>
+
+                    </div>
+
+                    <div class="match-team">
+
+                        <div class="club-badge">
+                            PSG
+                        </div>
+
+                        <strong>
+                            Paris SG
+                        </strong>
+
+                    </div>
+
+                    <div class="match-events">
+                        <span>LINEUPS TBA</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATA NOTICE -->
+
+            <div class="data-notice">
+
+                <strong>LIVE DATA SYSTEM:</strong>
+
+                This interface is currently using demonstration
+                match data. The production version will connect
+                this layer to a football-data API through a secure
+                backend/serverless service. API credentials will
+                never be placed directly inside the public
+                frontend JavaScript.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-brand">
+
+            <div class="brand-ball">⚽</div>
+
+            <div>
+                <strong>FOOTBALL CHRONICLE</strong>
+                <span>THE GLOBAL FOOTBALL ARCHIVE</span>
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="../index.html">Home</a>
+            <a href="index.html">Live</a>
+            <a href="../matches/index.html">Matches</a>
+            <a href="../competitions/index.html">Competitions</a>
+            <a href="../clubs/index.html">Clubs</a>
+            <a href="../players/index.html">Players</a>
+            <a href="../history/index.html">History</a>
+            <a href="../records/index.html">Records</a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                FOOTBALL CHRONICLE // GLOBAL FOOTBALL DATABASE
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>
