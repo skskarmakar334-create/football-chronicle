@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Football Chronicle — The Complete World of Football</title>
+
+    <meta
+        name="description"
+        content="Football Chronicle is an interactive global football archive and live match platform covering football history, matches, clubs, players, competitions, statistics, records and live scores."
+    >
+
+    <meta name="theme-color" content="#07120d">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         LOADING / INTRO
+    ====================================================== -->
+
+    <div id="intro-screen">
+
+        <div class="stadium-light light-one"></div>
+        <div class="stadium-light light-two"></div>
+
+        <div class="intro-goal">
+
+            <div class="goal-post">
+                <span class="post-left"></span>
+                <span class="post-right"></span>
+                <span class="post-top"></span>
+                <span class="goal-net"></span>
+            </div>
+
+            <div class="intro-ball">⚽</div>
+
+        </div>
+
+        <div class="intro-text">
+            <span>ENTERING</span>
+            <strong>FOOTBALL CHRONICLE</strong>
+        </div>
+
+        <div class="loading-line">
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BACKGROUND SYSTEM
+    ====================================================== -->
+
+    <div class="background-grid"></div>
+    <div class="background-glow"></div>
+
+    <canvas id="footballCanvas"></canvas>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <a href="index.html" class="brand">
+
+            <div class="brand-ball">⚽</div>
+
+            <div>
+                <span class="brand-small">THE WORLD OF</span>
+                <span class="brand-name">FOOTBALL CHRONICLE</span>
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="live/index.html">
+                <span class="nav-dot live-dot"></span>
+                LIVE
+            </a>
+
+            <a href="matches/index.html">MATCHES</a>
+
+            <a href="competitions/index.html">COMPETITIONS</a>
+
+            <a href="clubs/index.html">CLUBS</a>
+
+            <a href="players/index.html">PLAYERS</a>
+
+            <a href="history/index.html">HISTORY</a>
+
+        </nav>
+
+
+        <a href="search/index.html" class="search-button">
+            <span>⌕</span>
+            SEARCH
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="status-pill">
+                    <span class="status-light"></span>
+                    FOOTBALL ARCHIVE ONLINE
+                </div>
+
+
+                <h1>
+                    THE COMPLETE
+                    <span>WORLD OF FOOTBALL.</span>
+                </h1>
+
+
+                <p class="hero-description">
+                    Explore football from its origins to the modern game.
+                    Follow live matches, discover legendary players and clubs,
+                    explore World Cups, competitions, statistics, records and
+                    the stories that shaped the world's game.
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a href="live/index.html" class="primary-button">
+                        <span>●</span>
+                        LIVE FOOTBALL
+                    </a>
+
+                    <a href="history/index.html" class="secondary-button">
+                        EXPLORE HISTORY
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO GOAL -->
+
+            <div class="hero-stadium">
+
+                <div class="stadium-glow"></div>
+
+                <div class="goal-frame">
+
+                    <div class="goal-bar left-bar"></div>
+                    <div class="goal-bar right-bar"></div>
+                    <div class="goal-bar top-bar"></div>
+
+                    <div class="net net-back"></div>
+                    <div class="net net-front"></div>
+
+                    <div class="hero-ball">
+                        ⚽
+                    </div>
+
+                </div>
+
+                <div class="pitch">
+
+                    <div class="pitch-line halfway"></div>
+                    <div class="pitch-circle"></div>
+                    <div class="pitch-dot"></div>
+
+                </div>
+
+                <div class="stadium-label">
+                    <span>FC // 001</span>
+                    <span>GLOBAL FOOTBALL DATABASE</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LIVE MATCH PREVIEW
+        ================================================== -->
+
+        <section class="section live-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        <span class="live-pulse"></span>
+                        LIVE NOW
+                    </span>
+
+                    <h2>FOOTBALL<br><span>IN MOTION.</span></h2>
+                </div>
+
+                <a href="live/index.html" class="section-link">
+                    VIEW LIVE CENTRE →
+                </a>
+
+            </div>
+
+
+            <div class="scoreboard">
+
+                <div class="scoreboard-top">
+                    <span>LIVE MATCH CENTRE</span>
+                    <span class="match-status">● LIVE</span>
+                </div>
+
+
+                <div class="match-card">
+
+                    <div class="team team-home">
+
+                        <div class="team-placeholder">
+                            FC
+                        </div>
+
+                        <strong>ARSENAL</strong>
+
+                    </div>
+
+
+                    <div class="score-area">
+
+                        <span class="match-minute">67'</span>
+
+                        <div class="score">
+                            <strong>2</strong>
+                            <span>—</span>
+                            <strong>1</strong>
+                        </div>
+
+                        <span class="match-label">
+                            PREMIER LEAGUE
+                        </span>
+
+                    </div>
+
+
+                    <div class="team team-away">
+
+                        <div class="team-placeholder">
+                            FC
+                        </div>
+
+                        <strong>CHELSEA</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-events">
+
+                    <span>⚽ 23' Arsenal</span>
+                    <span>⚽ 51' Arsenal</span>
+                    <span>⚽ 62' Chelsea</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTBALL UNIVERSE
+        ================================================== -->
+
+        <section class="section universe-section">
+
+            <div class="section-heading centered">
+
+                <span class="eyebrow">THE FOOTBALL UNIVERSE</span>
+
+                <h2>
+                    EVERYTHING.
+                    <span>CONNECTED.</span>
+                </h2>
+
+                <p>
+                    One place for the modern game and the history behind it.
+                </p>
+
+            </div>
+
+
+            <div class="universe-grid">
+
+
+                <a href="live/index.html" class="universe-card live-card">
+
+                    <span class="card-number">01</span>
+
+                    <div class="card-icon">◉</div>
+
+                    <h3>LIVE FOOTBALL</h3>
+
+                    <p>
+                        Live scores, fixtures, match events, lineups,
+                        cards, goals and substitutions.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="competitions/index.html" class="universe-card">
+
+                    <span class="card-number">02</span>
+
+                    <div class="card-icon">🏆</div>
+
+                    <h3>COMPETITIONS</h3>
+
+                    <p>
+                        Domestic leagues, continental competitions and
+                        international tournaments.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="clubs/index.html" class="universe-card">
+
+                    <span class="card-number">03</span>
+
+                    <div class="card-icon">▣</div>
+
+                    <h3>CLUBS</h3>
+
+                    <p>
+                        Club histories, honours, eras, managers, legends
+                        and important matches.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="players/index.html" class="universe-card">
+
+                    <span class="card-number">04</span>
+
+                    <div class="card-icon">◇</div>
+
+                    <h3>PLAYERS</h3>
+
+                    <p>
+                        Careers, appearances, goals, trophies,
+                        international records and major moments.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="world-cup/index.html" class="universe-card">
+
+                    <span class="card-number">05</span>
+
+                    <div class="card-icon">🏆</div>
+
+                    <h3>WORLD CUP</h3>
+
+                    <p>
+                        Explore every FIFA World Cup tournament,
+                        from 1930 through the modern era.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="history/index.html" class="universe-card history-card">
+
+                    <span class="card-number">06</span>
+
+                    <div class="card-icon">◷</div>
+
+                    <h3>FOOTBALL HISTORY</h3>
+
+                    <p>
+                        From early ball games and the Laws of the Game
+                        to today's global sport.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="countries/index.html" class="universe-card">
+
+                    <span class="card-number">07</span>
+
+                    <div class="card-icon">◎</div>
+
+                    <h3>COUNTRIES</h3>
+
+                    <p>
+                        National teams, football culture, tournaments,
+                        clubs, players and historical records.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="statistics/index.html" class="universe-card">
+
+                    <span class="card-number">08</span>
+
+                    <div class="card-icon">▥</div>
+
+                    <h3>STATISTICS</h3>
+
+                    <p>
+                        Football data, player statistics, club records,
+                        competition statistics and comparisons.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+
+                <a href="records/index.html" class="universe-card">
+
+                    <span class="card-number">09</span>
+
+                    <div class="card-icon">◆</div>
+
+                    <h3>RECORDS</h3>
+
+                    <p>
+                        World Cup, international, club and player
+                        records from across football history.
+                    </p>
+
+                    <span class="card-arrow">→</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HISTORY TIMELINE
+        ================================================== -->
+
+        <section class="section timeline-section">
+
+            <div class="timeline-intro">
+
+                <span class="eyebrow">THE TIMELINE</span>
+
+                <h2>
+                    MORE THAN
+                    <span>A GAME.</span>
+                </h2>
+
+                <p>
+                    Football has been shaped by centuries of evolution,
+                    institutions, players, competitions and unforgettable
+                    moments.
+                </p>
+
+                <a href="history/index.html" class="secondary-button">
+                    ENTER THE ARCHIVE →
+                </a>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <span class="timeline-year">1863</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div>
+                        <h3>THE LAWS OF THE GAME</h3>
+                        <p>
+                            The Football Association establishes a common
+                            code of laws in England.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-year">1930</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div>
+                        <h3>THE FIRST WORLD CUP</h3>
+                        <p>
+                            Uruguay hosts the inaugural FIFA World Cup.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-year">1955</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div>
+                        <h3>EUROPEAN CLUB FOOTBALL</h3>
+                        <p>
+                            The European Cup begins a new era of continental
+                            club competition.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-year">1992</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div>
+                        <h3>THE PREMIER LEAGUE ERA</h3>
+                        <p>
+                            England's top division enters a new commercial
+                            and broadcasting era.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-year">2018+</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div>
+                        <h3>THE DATA ERA</h3>
+                        <p>
+                            VAR, advanced analytics and increasingly
+                            data-driven football reshape the modern game.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search players, clubs, matches, countries, competitions..."
+                    autocomplete="off"
+                >
+
+                <span class="search-shortcut">
+                    ENTER
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-brand">
+
+            <div class="brand-ball">⚽</div>
+
+            <div>
+                <strong>FOOTBALL CHRONICLE</strong>
+                <span>THE GLOBAL FOOTBALL ARCHIVE</span>
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="live/index.html">Live</a>
+            <a href="matches/index.html">Matches</a>
+            <a href="competitions/index.html">Competitions</a>
+            <a href="clubs/index.html">Clubs</a>
+            <a href="players/index.html">Players</a>
+            <a href="history/index.html">History</a>
+            <a href="records/index.html">Records</a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                FOOTBALL CHRONICLE // GLOBAL FOOTBALL DATABASE
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
