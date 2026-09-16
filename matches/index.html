@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matches — Football Chronicle</title>
+
+    <meta
+        name="description"
+        content="Explore football matches, fixtures, results, matchdays and historical match data from around the world."
+    >
+
+    <meta name="theme-color" content="#050806">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        /* =====================================================
+           MATCHES PAGE
+        ====================================================== */
+
+        .page-shell {
+            width: min(calc(100% - 60px), 1400px);
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .page-hero {
+            min-height: 440px;
+
+            display: flex;
+            align-items: end;
+
+            padding: 100px 0 70px;
+
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            right: 3%;
+            top: 5%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(57,255,136,.08),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+        }
+
+        .page-kicker {
+            color: var(--green);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-display);
+
+            font-size: clamp(60px, 9vw, 125px);
+
+            line-height: .84;
+
+            letter-spacing: -6px;
+        }
+
+        .page-hero h1 span {
+            display: block;
+
+            color: transparent;
+
+            -webkit-text-stroke:
+                1px rgba(238,255,244,.4);
+        }
+
+        .page-hero p {
+            max-width: 650px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-top: 28px;
+        }
+
+
+        /* =====================================================
+           MATCH CONTROL SYSTEM
+        ====================================================== */
+
+        .control-system {
+
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+
+            padding: 20px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .control-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .control-button {
+
+            height: 44px;
+
+            padding: 0 17px;
+
+            border: 1px solid var(--line);
+
+            background:
+                rgba(255,255,255,.015);
+
+            color: #84968a;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.2px;
+
+            cursor: pointer;
+
+            transition: .3s ease;
+        }
+
+        .control-button:hover {
+
+            color: var(--green);
+
+            border-color:
+                var(--line-bright);
+        }
+
+        .control-button.active {
+
+            background: var(--green);
+
+            color: #041009;
+
+            border-color: var(--green);
+        }
+
+        .control-right {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .filter {
+
+            height: 44px;
+
+            min-width: 170px;
+
+            border: 1px solid var(--line);
+
+            background: #08100b;
+
+            color: var(--white);
+
+            padding: 0 14px;
+
+            outline: none;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           DATE NAVIGATION
+        ====================================================== */
+
+        .date-strip {
+
+            margin-top: 35px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 1px;
+
+            background: var(--line);
+        }
+
+        .date-card {
+
+            min-height: 75px;
+
+            border: none;
+
+            background:
+                rgba(8,17,11,.92);
+
+            color: var(--muted);
+
+            cursor: pointer;
+
+            transition: .3s ease;
+        }
+
+        .date-card:hover {
+
+            background:
+                rgba(25,50,32,.9);
+
+            color: var(--white);
+        }
+
+        .date-card.active {
+
+            background: var(--green);
+
+            color: #041009;
+        }
+
+        .date-card small {
+
+            display: block;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 7px;
+        }
+
+        .date-card strong {
+
+            font-family: var(--font-display);
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           ARCHIVE SUMMARY
+        ====================================================== */
+
+        .archive-summary {
+
+            margin-top: 50px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 1px;
+
+            background: var(--line);
+        }
+
+        .summary-card {
+
+            padding: 25px;
+
+            background:
+                rgba(8,17,11,.9);
+        }
+
+        .summary-card span {
+
+            display: block;
+
+            color: #5d7064;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 12px;
+        }
+
+        .summary-card strong {
+
+            font-family: var(--font-display);
+
+            font-size: 30px;
+        }
+
+
+        /* =====================================================
+           MATCH ARCHIVE
+        ====================================================== */
+
+        .matches-area {
+
+            padding: 75px 0 140px;
+        }
+
+        .archive-heading {
+
+            display: flex;
+
+            align-items: end;
+
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+        }
+
+        .archive-heading h2 {
+
+            font-family: var(--font-display);
+
+            font-size: 38px;
+
+            letter-spacing: -2px;
+        }
+
+        .archive-heading p {
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-top: 8px;
+        }
+
+        .archive-heading > span {
+
+            color: #586a5e;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        /* =====================================================
+           COMPETITION BLOCK
+        ====================================================== */
+
+        .competition-block {
+
+            margin-bottom: 30px;
+
+            border: 1px solid var(--line);
+
+            background:
+                rgba(7,15,10,.75);
+        }
+
+        .competition-header {
+
+            min-height: 65px;
+
+            padding: 0 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--line);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(57,255,136,.045),
+                    transparent
+                );
+        }
+
+        .competition-name {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .competition-icon {
+
+            width: 30px;
+            height: 30px;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid var(--line-bright);
+
+            border-radius: 50%;
+
+            color: var(--green);
+
+            font-size: 8px;
+
+            font-weight: 800;
+        }
+
+        .competition-name strong {
+
+            font-family: var(--font-display);
+
+            font-size: 12px;
+        }
+
+        .competition-country {
+
+            color: #607167;
+
+            font-size: 7px;
+
+            letter-spacing: 1px;
+
+            margin-top: 4px;
+        }
+
+        .competition-header > span {
+
+            color: #536359;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           MATCH ROW
+        ====================================================== */
+
+        .match-row {
+
+            min-height: 96px;
+
+            display: grid;
+
+            grid-template-columns:
+                95px
+                1fr
+                150px
+                1fr
+                130px;
+
+            align-items: center;
+
+            padding: 0 20px;
+
+            border-bottom:
+                1px solid rgba(102,255,153,.07);
+
+            transition: .3s ease;
+        }
+
+        .match-row:last-child {
+            border-bottom: none;
+        }
+
+        .match-row:hover {
+
+            background:
+                rgba(57,255,136,.025);
+        }
+
+
+        /* =====================================================
+           TIME
+        ====================================================== */
+
+        .match-time {
+
+            color: #718279;
+
+            font-family: var(--font-display);
+
+            font-size: 12px;
+        }
+
+        .match-time.finished {
+
+            color: #526258;
+        }
+
+        .match-time.live {
+
+            color: var(--danger);
+        }
+
+
+        /* =====================================================
+           TEAM
+        ====================================================== */
+
+        .match-team {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .match-team.home {
+
+            justify-content: flex-end;
+
+            text-align: right;
+        }
+
+        .club-badge {
+
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid var(--line);
+
+            border-radius: 50%;
+
+            color: var(--green);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(57,255,136,.08),
+                    transparent
+                );
+
+            font-family: var(--font-display);
+
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           SCORE
+        ====================================================== */
+
+        .score-column {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+        .score-line {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-family: var(--font-display);
+
+            font-size: 24px;
+        }
+
+        .score-line span {
+
+            color: #405047;
+
+            font-size: 15px;
+        }
+
+        .status-label {
+
+            margin-top: 5px;
+
+            color: #596a60;
+
+            font-size: 7px;
+
+            letter-spacing: 1.2px;
+        }
+
+        .status-label.live {
+
+            color: var(--danger);
+        }
+
+
+        /* ===============================*
+      
